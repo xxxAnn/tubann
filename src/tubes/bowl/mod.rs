@@ -1,3 +1,3 @@
-mod general;
+mod base;
 
-pub use general::Bowl;
+pub use base::BaseBowl;

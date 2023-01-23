@@ -2,4 +2,4 @@
 
 use super::ball::Ball;
 
-mod general;
+mod base;
