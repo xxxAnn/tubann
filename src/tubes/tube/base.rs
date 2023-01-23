@@ -40,6 +40,7 @@ where T: Into<Ball<T>> + Clone {
 impl<'a, T> BaseTubeConnector<'a, T> 
 where T: Into<Ball<T>> + Clone {
     pub fn base(&mut self, bowl: Bowl<T>) {
+        #[allow(irrefutable_let_patterns)]
         if let Bowl::Base(basic_bowl) = bowl {
             self.r.bowls.push(Rc::new(Mutex::new(Bowl::Base(basic_bowl))));
         }
