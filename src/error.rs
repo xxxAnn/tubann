@@ -1,10 +1,5 @@
-use std::error::Error;
-
 #[derive(Debug)]
-pub struct InvalidTubeTypeError {
-    expected: String,
-    got: String
-}
+pub struct InvalidTubeTypeError;
 
 #[derive(Debug)]
 pub struct InvalidBowlTypeError {
