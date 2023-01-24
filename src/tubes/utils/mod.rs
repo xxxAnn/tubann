@@ -14,7 +14,7 @@ impl BowlBuilder {
     where T: Clone + std::fmt::Display + Into<Ball<T>> {
         Bowl::Logging(LoggingBowl::new(f))
     }
-    pub fn multi<T>(f: Box<dyn Fn(&T)>) -> Bowl<T>
+    pub fn multi<T>(f: Box<dyn Fn(&T) -> T>) -> Bowl<T>
     where T: Clone + std::fmt::Display + Into<Ball<T>> {
         Bowl::Multi(MultiBowl::new(f))
     }

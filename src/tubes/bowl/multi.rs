@@ -4,17 +4,17 @@ use crate::tubes::{tube::Tube, ball::Ball};
 
 pub struct MultiBowl<T>
 where T: Into<Ball<T>> + Clone {
-    f: Box<dyn Fn(&T)>,
+    f: Box<dyn Fn(&T) -> T>,
     outs: Vec<Rc<Mutex<Tube<T>>>>,
 }
 
 impl<T> MultiBowl<T>
 where T: Clone + Into<Ball<T>> + std::fmt::Display {
     pub fn hit(&mut self, obj: Ball<T>) {
-        (self.f)(&*obj.open().lock().unwrap());
+        let m = (self.f)(&*obj.open().lock().unwrap());
         for out in &self.outs {
             match &*out.lock().unwrap() {
-                Tube::Base(t) => t.roll((&*obj.open().lock().unwrap()).clone()),
+                Tube::Base(t) => t.roll(m.clone()),
             }
         }
     }
@@ -22,7 +22,7 @@ where T: Clone + Into<Ball<T>> + std::fmt::Display {
 
 impl<T> MultiBowl<T>
 where T: Clone + Into<Ball<T>> {
-    pub fn new(f: Box<dyn Fn(&T)>) -> Self {
+    pub fn new(f: Box<dyn Fn(&T) -> T>) -> Self {
         MultiBowl {
             f,
             outs: Vec::new()
