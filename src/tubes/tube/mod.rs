@@ -14,7 +14,7 @@ where T: Into<Ball<T>> + Clone {
 }
 
 impl<T> Tube<T>
-where T: Into<Ball<T>> + Clone {
+where T: Into<Ball<T>> + Clone + std::fmt::Display {
     pub fn roll(&self, obj: T) {
         match self {
             Tube::Base(tube) => {

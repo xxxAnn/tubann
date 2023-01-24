@@ -7,6 +7,13 @@ where T: Clone {
     content: Rc<Mutex<T>>,
 }
 
+impl<T> std::fmt::Display for Ball<T>
+where T: Clone + std::fmt::Display {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "\x1b[94m(INFO)\x1b[0m Passing Ball object containing: {} to Logging Bowl.", &*self.content.lock().unwrap())
+    }
+}
+
 impl<T> From<T> for Ball<T> 
 where T: Sized + Send + Clone {
     fn from(value: T) -> Self {
