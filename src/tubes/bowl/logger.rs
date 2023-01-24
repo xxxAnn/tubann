@@ -19,4 +19,7 @@ where T: Clone {
             f
         }
     }
+    pub fn type_name() -> String {
+        "Base".to_string()
+    }
 }

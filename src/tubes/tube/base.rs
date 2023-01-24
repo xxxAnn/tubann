@@ -19,6 +19,9 @@ where T: Into<Ball<T>> + Clone + std::fmt::Display {
                 Bowl::Logging(b) => {
                     b.hit(ball.clone())
                 }
+                Bowl::Multi(b) => {
+                    b.hit(ball.clone())
+                }
              }
         }
     }
