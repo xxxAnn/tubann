@@ -13,9 +13,7 @@ where T: Clone + Into<Ball<T>> + std::fmt::Display {
     pub fn hit(&mut self, obj: Ball<T>) {
         let m = (self.f)(&*obj.open().lock().unwrap());
         for out in &self.outs {
-            match &*out.lock().unwrap() {
-                Tube::Base(t) => t.roll(m.clone()),
-            }
+            out.lock().unwrap().roll(m.clone());
         }
     }
 }
