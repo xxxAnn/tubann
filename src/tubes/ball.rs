@@ -15,7 +15,7 @@ where T: Clone + std::fmt::Display {
 }
 
 impl<T> From<T> for Ball<T> 
-where T: Sized + Send + Clone {
+where T: Sized + Send + Clone + std::fmt::Display {
     fn from(value: T) -> Self {
         Ball {
             content: Rc::new(Mutex::new(value)),

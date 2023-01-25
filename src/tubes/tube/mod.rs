@@ -2,31 +2,20 @@
 
 mod base;
 
+use crate::error::TubeResult;
+
 use self::base::BaseTubeConnector;
 
-use super::{ball::Ball, bowl::BaseBowl};
+use super::{ball::Ball, bowl::{BaseBowl, Bowl}};
 pub use base::BaseTube;
 
 
-pub enum Tube<T>
-where T: Into<Ball<T>> + Clone {
-    Base(BaseTube<T>)
+pub trait Tube<T>
+where T: Into<Ball<T>> + Clone + std::fmt::Display {
+    fn roll(&self, obj: T) -> TubeResult<()>;
 }
 
-impl<T> Tube<T>
-where T: Into<Ball<T>> + Clone + std::fmt::Display {
-    pub fn roll(&self, obj: T) {
-        match self {
-            Tube::Base(tube) => {
-                tube.roll(obj);
-            },
-        }
-    }
-    pub fn connect(&mut self) -> BaseTubeConnector<T> {
-        return match self {
-            Tube::Base(tube) => {
-                tube.connect()
-            },
-        }
-    }
+pub trait TubeConnector<T, U>
+where T: Into<Ball<T>> + Clone + std::fmt::Display, U: Tube<T> {
+    fn send_to(&mut self, bowl: Box<dyn Bowl<T>>) -> TubeResult<()>;
 }

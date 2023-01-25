@@ -7,6 +7,15 @@ pub struct InvalidBowlTypeError {
     got: String
 }
 
+#[derive(Debug)]
+pub struct GeneralTubeError;
+
+impl std::fmt::Display for GeneralTubeError {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "Something unexpected happened.")
+    }
+}
+
 impl std::fmt::Display for InvalidBowlTypeError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "Expected {}Bowl, got {}Bowl.", self.expected, self.got)

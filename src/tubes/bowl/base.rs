@@ -1,24 +1,31 @@
+//!
+
 use crate::tubes::ball::Ball;
 
+use super::Bowl;
+
+/// The `BaseBowl` type. Simplest implementation of a `Bowl`. 
+/// It simply calls its inner function upon receiving a `Ball`.
 pub struct BaseBowl<T> {
     f: Box<dyn Fn(&T)>
 }
 
-impl<T> BaseBowl<T>
+impl<T> Bowl<T> for BaseBowl<T>
 where T: Clone {
-    pub fn hit(&mut self, obj: Ball<T>) {
+    fn hit(&mut self, obj: Ball<T>) {
         (self.f)(&*obj.open().lock().unwrap());
+    }
+    fn type_name() -> String {
+        "Base".to_string()
     }
 }
 
 impl<T> BaseBowl<T>
 where T: Clone {
-    pub fn new(f: Box<dyn Fn(&T)>) -> Self {
-        BaseBowl {
+    /// Creates a new `BaseBowl`.
+    pub fn new(f: Box<dyn Fn(&T)>) -> Box<Self> {
+        Box::new(BaseBowl {
             f
-        }
-    }
-    pub fn type_name() -> String {
-        "Base".to_string()
+        })
     }
 }
