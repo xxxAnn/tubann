@@ -6,7 +6,12 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+winit = {version = "0.27", optional = true}
+env_logger = {versioon = "0.10", optional = true}
+log = {version = "0.4", optional = true}
+wgpu = {version = "0.14", optional = true}
 
 [features]
 default = ["tubes"]
 tubes = []
+graphics = ["dep:winit", "dep:env_logger", "dep:log", "dep:wgpu"]
