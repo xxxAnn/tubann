@@ -12,6 +12,6 @@ log = {version = "0.4", optional = true}
 wgpu = {version = "0.14", optional = true}
 
 [features]
-default = ["tubes"]
+default = ["tubes", "graphics"]
 tubes = []
 graphics = ["dep:winit", "dep:env_logger", "dep:log", "dep:wgpu"]
